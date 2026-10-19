@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Message 💌</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        135deg,
+        #e8f5e9,
+        #d4edda,
+        #f1f8e9
+    );
+    font-family: Arial, sans-serif;
+    color: #5c8868;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 92%;
+    max-width: 450px;
+    text-align: center;
+    padding: 25px 12px;
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 25px;
+    color:#5c8868;
+}
+
+.envelope {
+    position: relative;
+    width: 220px;
+    height: 145px;
+    margin: 45px auto;
+    background:#90cca0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px #71977b35;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 85px solid #5c8868;
+    transform-origin: top;
+    transition: transform 0.7s;
+    z-index: 3;
+}
+
+.envelope::after {
+    content: "♡";
+    position: absolute;
+    top: 58px;
+    left: 97px;
+    font-size: 35px;
+    color: white;
+    z-index: 4;
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+}
+
+.envelope.open::after {
+    opacity: 0;
+}
+
+.flap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 110px solid #71aa80;
+    border-right: 110px solid #71aa80;
+    border-top: 72px solid transparent;
+    border-bottom: 73px solid#71aa80;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+button {
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    background: #8fbe98;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 8px;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #78ad83;
+}
+
+/* صندوق الرسالة */
+
+#letter {
+    display: none;
+    position: relative;
+    background: #ffffff;
+    padding: 25px 18px;
+    border: 2px solid #8fc793;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px #71977b25;
+    animation: appear 0.8s ease;
+}
+
+#letter h2 {
+    color: #679873;
+    margin-top: 5px;
+}
+
+#letter p {
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #496650;
+}
+
+/* صور الشخصيات حول الرسالة */
+
+.characters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px auto 5px;
+}
+
+.character {
+    width: 85px;
+    height: 95px;
+    object-fit: contain;
+    animation: float 2.5s ease-in-out infinite;
+}
+
+.character:nth-child(even) {
+    animation-delay: 0.5s;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 360px) {
+    .character {
+        width: 70px;
+        height: 80px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}
+#background-characters {
+    display: none;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    height: 1px;;
+    width: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+#background-characters img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+@keyframes drop {
+    from { transform: translateY(-10px) rotate(-8deg); }
+    to { transform: translateY(25px) rotate(8deg); }
+}
+
+@keyframes run {
+    from { transform: translateX(-5px); }
+    to { transform: translateX(5px); }
+}
+</style>
+</head>
+
+<body>
+
+    <div id="background-characters">
+
+    <img src="C:\Users\PC\Downloads\Pink and Cream Abstract Page Border Poster.png" class="spiderman" alt="Spider-Man">
+
+    
+</div>
+<div class="container">
+
+    <h2 id="heading">You have a little message 💌</h2>
+
+    <div
+        class="envelope"
+        id="envelope"
+        onclick="openLetter()"
+    >
+        <div class="flap"></div>
+    </div>
+
+    <button id="openBtn" onclick="openLetter()">
+        Open your message 💚
+    </button>
+
+    <div id="letter">
+
+        <h2>Happy Birthday</h2>
+
+        <p id="message">Happy birthday, Miro.  
+I hope you feel great. You are a good and kind person, and I thank you for your help. I am grateful to you, and you are truly an amazing person. Keep going and be happy. Happy birthday, may you always be happy and healthy.💌 </p>
+
+
+    </div>
+
+</div>
+
+<script>
+function openLetter() {
+    const envelope = document.getElementById("envelope");
+    const letter = document.getElementById("letter");
+    const button = document.getElementById("openBtn");
+    const heading = document.getElementById("heading");
+    const characters = document.getElementById("background-characters");
+
+    if (letter.style.display === "block") return;
+
+    envelope.classList.add("open");
+    button.classList.add("hidden");
+    heading.classList.add("hidden");
+
+    setTimeout(() => {
+        envelope.classList.add("hidden");
+        letter.style.display = "block";
+
+        if (characters) {
+            characters.style.display = "block";
+        }
+    }, 700);
+}
+</script>
+
+</body>
+</html>
